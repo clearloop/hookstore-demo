@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/table";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import { XIcon } from "lucide-react";
 
 export default function ReviewHooks({ children }: { children: ReactNode }) {
   const { hooks } = useContext(DeployContext);
@@ -30,7 +31,7 @@ export default function ReviewHooks({ children }: { children: ReactNode }) {
     let perms: Record<number, Hook[]> = {};
 
     hooks.forEach((hook) => {
-      for (const i in hook.perms) {
+      for (const i of hook.perms) {
         if (!perms[i]) {
           perms[i] = [];
         }
@@ -38,6 +39,7 @@ export default function ReviewHooks({ children }: { children: ReactNode }) {
       }
     });
 
+    console.log(perms);
     return perms;
   }, [hooks]);
 
@@ -56,8 +58,13 @@ export default function ReviewHooks({ children }: { children: ReactNode }) {
           <Table>
             <TableHeader>
               <TableRow>
-                {["Permisson", ...hooks.map((h) => h.name)].map((h) => (
-                  <TableHead className="select-none">{h}</TableHead>
+                <TableHead>Permission</TableHead>
+                {hooks.map((h) => (
+                  <TableHead className="select-none">
+                    <div className="flex flex-row items-center space-x-1">
+                      <div>{h.name}</div>
+                    </div>
+                  </TableHead>
                 ))}
               </TableRow>
             </TableHeader>

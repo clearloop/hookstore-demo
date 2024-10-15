@@ -23,6 +23,8 @@ import Link from "next/link";
 import { useContext, useMemo, useState } from "react";
 import ReviewHooks from "./market/review";
 import { HOOK_PERMISSIONS } from "@/lib/constants";
+import { toast } from "sonner";
+import { Hook } from "@/lib/hookPerm";
 
 const CATEGORIES = [
   "All",
@@ -45,16 +47,15 @@ export default function Home() {
         >
           Hookstore
         </Link>
-        <Link href="/">
+        {/* <Link href="/">
           <div className="text-gray-100 text-lg">Marketplace</div>
-        </Link>
+        </Link> */}
         <Link href="/">
           <div className="text-gray-500 text-lg">Other Features...</div>
         </Link>
       </section>
       <section className="py-6 text-3xl font-bold w-full flex justify-center pb-10">
-        Create Uniswap V4 pools within clicks, earn profits from developing
-        hooks.
+        Create Uniswap V4 pools within clicks, earn from developing hooks.
       </section>
       <section className="flex flex-row space-x-6 justify-end px-12">
         <Select>
@@ -68,7 +69,7 @@ export default function Home() {
         </Select>
         <Select>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Hook Access" />
+            <SelectValue placeholder="Hook Permission" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="42">All</SelectItem>
@@ -105,8 +106,7 @@ export default function Home() {
                 <SelectValue placeholder="Select a Pool" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="42">Start a new Hook</SelectItem>
-                <SelectItem value="43">Start a new Pool</SelectItem>
+                <SelectItem value="42">Start a new Pool</SelectItem>
                 <Separator />
                 <SelectItem value="0">My First Pool</SelectItem>
                 <SelectItem value="1">My Second Pool</SelectItem>
@@ -146,7 +146,9 @@ export default function Home() {
             <ReviewHooks>
               <Button variant="link">Review Hooks</Button>
             </ReviewHooks>
-            <Button>Deploy</Button>
+            <Button onClick={() => toast.info("Working in progress ...")}>
+              Deploy
+            </Button>
           </div>
         </div>
       </section>
@@ -157,7 +159,7 @@ export default function Home() {
 function HookCategory({ id, name }: { id: number; name: string }) {
   return (
     <div className="flex flex-row space-x-2 select-none">
-      <Checkbox id={id.toString()} />
+      <Checkbox id={id.toString()} defaultChecked={true} />
       <label
         htmlFor={id.toString()}
         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 hover:cursor-pointer"
@@ -168,7 +170,7 @@ function HookCategory({ id, name }: { id: number; name: string }) {
   );
 }
 
-function HookSpec({ hook }: { hook: IHook }) {
+function HookSpec({ hook }: { hook: Hook }) {
   const { hooks, addHook, removeHook } = useContext(DeployContext);
   const installed = useMemo(() => {
     if (hooks.find((h) => h.name === hook.name)) {
