@@ -17,64 +17,20 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { DeployContext } from "@/context/deploy";
+import { HOOKS } from "@/lib/mock";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useContext, useMemo, useState } from "react";
-
-interface IHook {
-  name: string;
-  desc: string;
-  author: string;
-  category: string;
-  access: string[];
-}
+import ReviewHooks from "./market/review";
+import { HOOK_PERMISSIONS } from "@/lib/constants";
 
 const CATEGORIES = [
   "All",
-  "Truncated Oracle",
   "Limit Order",
   "Volatility Oracle",
   "TWAMM",
   "Geomean Oracle",
   "Full Range",
-];
-
-const HOOKS: IHook[] = [
-  {
-    name: "TWAMM",
-    desc: "A TWAMM (Time Weighted Average Market Maker) is a type of market maker that uses time-weighted averages to cal...",
-    author: "Uniswap Labs",
-    category: "",
-    access: [],
-  },
-  {
-    name: "Geomeaon Oracle",
-    desc: "A unique hook making a Uniswap pool function as an oracle. The geomean price is calculated using the prices of ...",
-    author: "Uniswap Labs",
-    category: "",
-    access: [],
-  },
-  {
-    name: "Volatility Oracle",
-    desc: "A volatility oracle is a contract that provides information about the volatility of an asset. This information can...",
-    author: "Uniswap Labs",
-    category: "",
-    access: [],
-  },
-  {
-    name: "Full Range",
-    desc: "A hook that allows a Uniswap pool to provide liquidity for a range of prices. This can be used to create a mark...",
-    author: "Uniswap Labs",
-    category: "",
-    access: [],
-  },
-  {
-    name: "Truncated Oracle",
-    desc: "A truncated oracle is an onchain price oracle that records the price of an asset in a Uniswap liquidity pool using...",
-    author: "Uniswap Labs",
-    category: "",
-    access: [],
-  },
 ];
 
 export default function Home() {
@@ -83,7 +39,12 @@ export default function Home() {
   return (
     <main className="h-screen flex flex-col">
       <section className="py-6 space-x-6 flex flex-row items-end text-xl px-12">
-        <div className="text-pink-500 font-bold ">Hookstore</div>
+        <Link
+          href="/"
+          className="text-pink-500 font-bold select-none hover:cursor-pointer"
+        >
+          Hookstore
+        </Link>
         <Link href="/">
           <div className="text-gray-100 text-lg">Marketplace</div>
         </Link>
@@ -111,22 +72,11 @@ export default function Home() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="42">All</SelectItem>
-            <SelectItem value="0">Before Initialize</SelectItem>
-            <SelectItem value="1">After Initialize</SelectItem>
-            <SelectItem value="2">Before Add Liquidity</SelectItem>
-            <SelectItem value="3">After Add Liquidity</SelectItem>
-            <SelectItem value="4">Before Remove Liquidity</SelectItem>
-            <SelectItem value="5">After Remove Liquidity</SelectItem>
-            <SelectItem value="6">Before Swap</SelectItem>
-            <SelectItem value="7">After Swap</SelectItem>
-            <SelectItem value="8">Before Donate</SelectItem>
-            <SelectItem value="9">After Donate</SelectItem>
-            <SelectItem value="10">Before Swap Return Delta</SelectItem>
-            <SelectItem value="11">After Swap Return Delta</SelectItem>
-            <SelectItem value="12">After Add Liquidity Return Data</SelectItem>
-            <SelectItem value="13">
-              After Remove Liquidity Return Data
-            </SelectItem>
+            {HOOK_PERMISSIONS.map((p, i) => (
+              <SelectItem key={i} value={i.toString()}>
+                {p}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </section>
@@ -155,7 +105,8 @@ export default function Home() {
                 <SelectValue placeholder="Select a Pool" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="42">Create a new Pool</SelectItem>
+                <SelectItem value="42">Start a new Hook</SelectItem>
+                <SelectItem value="43">Start a new Pool</SelectItem>
                 <Separator />
                 <SelectItem value="0">My First Pool</SelectItem>
                 <SelectItem value="1">My Second Pool</SelectItem>
@@ -191,7 +142,10 @@ export default function Home() {
             </div>
           </div>
           <div className="space-x-6">
-            <Button variant="link">Review Hooks</Button>
+            <Button variant="link">Edit Pool</Button>
+            <ReviewHooks>
+              <Button variant="link">Review Hooks</Button>
+            </ReviewHooks>
             <Button>Deploy</Button>
           </div>
         </div>
