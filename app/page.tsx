@@ -25,6 +25,8 @@ import ReviewHooks from "./market/review";
 import { HOOK_PERMISSIONS } from "@/lib/constants";
 import { toast } from "sonner";
 import { Hook } from "@/lib/hookPerm";
+import { ConnectButton, useConnectModal } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
 
 const CATEGORIES = [
   "All",
@@ -37,22 +39,28 @@ const CATEGORIES = [
 
 export default function Home() {
   const { hooks } = useContext(DeployContext);
+  const { openConnectModal } = useConnectModal();
 
   return (
     <main className="h-screen flex flex-col">
-      <section className="py-6 space-x-6 flex flex-row items-end text-xl px-12">
-        <Link
-          href="/"
-          className="text-pink-500 font-bold select-none hover:cursor-pointer"
-        >
-          Hookstore
-        </Link>
-        {/* <Link href="/">
+      <section className="py-6 space-x-6 flex flex-row items-center justify-between text-xl px-12">
+        <div className="space-x-6 flex flex-row items-end">
+          <Link
+            href="/"
+            className="text-pink-500 font-bold select-none hover:cursor-pointer"
+          >
+            Hookstore
+          </Link>
+          {/* <Link href="/">
           <div className="text-gray-100 text-lg">Marketplace</div>
         </Link> */}
-        <Link href="/">
-          <div className="text-gray-500 text-lg">Other Features...</div>
-        </Link>
+          <Link href="/">
+            <div className="text-gray-500 text-lg">Other Features...</div>
+          </Link>
+        </div>
+        <div className="text-sm">
+          <ConnectButton label="Connect" />
+        </div>
       </section>
       <section className="py-6 text-3xl font-bold w-full flex justify-center pb-10">
         Create Uniswap V4 pools within clicks, earn from developing hooks.
@@ -186,7 +194,7 @@ function HookSpec({ hook }: { hook: Hook }) {
         <CardTitle className="text-xl">{hook.name}</CardTitle>
         <div
           className={cn(
-            "text-xs rounded-md py-1 px-3 hover:cursor-pointer border select-none",
+            "text-sm rounded-md py-1 px-2 hover:cursor-pointer border select-none",
             installed
               ? "hover:underline hover:text-primary border-transparent"
               : "bg-primary"
