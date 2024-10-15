@@ -16,9 +16,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { DeployContext } from "@/context/deploy";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useMemo, useState } from "react";
 
 interface IHook {
   name: string;
@@ -77,15 +78,17 @@ const HOOKS: IHook[] = [
 ];
 
 export default function Home() {
+  const { hooks } = useContext(DeployContext);
+
   return (
     <main className="h-screen flex flex-col">
       <section className="py-6 space-x-6 flex flex-row items-end text-xl px-12">
         <div className="text-pink-500 font-bold ">Hookstore</div>
-        <Link href="/explore">
+        <Link href="/">
           <div className="text-gray-100 text-lg">Marketplace</div>
         </Link>
-        <Link href="/verify">
-          <div className="text-gray-500 text-lg">Verify</div>
+        <Link href="/">
+          <div className="text-gray-500 text-lg">Other Features...</div>
         </Link>
       </section>
       <section className="py-6 text-3xl font-bold w-full flex justify-center pb-10">
@@ -184,7 +187,7 @@ export default function Home() {
               <div className="border-r bg-secondary rounded-l-md">
                 <div className="p-2">Hooks</div>
               </div>{" "}
-              <div className="p-2">2</div>
+              <div className="p-2">{hooks.length}</div>
             </div>
           </div>
           <div className="space-x-6">
@@ -212,7 +215,15 @@ function HookCategory({ id, name }: { id: number; name: string }) {
 }
 
 function HookSpec({ hook }: { hook: IHook }) {
-  const [installed, setInstalled] = useState(false);
+  const { hooks, addHook, removeHook } = useContext(DeployContext);
+  const installed = useMemo(() => {
+    if (hooks.find((h) => h.name === hook.name)) {
+      return true;
+    } else {
+      return false;
+    }
+  }, [hooks, hook]);
+
   return (
     <Card>
       <CardHeader className="flex flex-row justify-between items-end">
@@ -224,7 +235,7 @@ function HookSpec({ hook }: { hook: IHook }) {
               ? "hover:underline hover:text-primary border-transparent"
               : "bg-primary"
           )}
-          onClick={() => setInstalled(!installed)}
+          onClick={() => (installed ? removeHook(hook) : addHook(hook))}
         >
           {installed ? "remove" : "install"}
         </div>
