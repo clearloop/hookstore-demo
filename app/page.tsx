@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,7 +16,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useState } from "react";
 
 interface IHook {
   name: string;
@@ -157,28 +160,28 @@ export default function Home() {
             </Select>
 
             <div className="border rounded-md flex flex-row text-sm">
-              <div className="border-r bg-secondary">
+              <div className="border-r bg-secondary rounded-l-md">
                 <div className="p-2">Pair</div>
               </div>{" "}
               <div className="p-2">UNI / ETH</div>
             </div>
 
             <div className="border rounded-md flex flex-row text-sm">
-              <div className="border-r bg-secondary">
+              <div className="border-r bg-secondary rounded-l-md">
                 <div className="p-2">Fee Tier</div>
               </div>{" "}
               <div className="p-2">0.30%</div>
             </div>
 
             <div className="border rounded-md flex flex-row text-sm">
-              <div className="border-r bg-secondary">
+              <div className="border-r bg-secondary rounded-l-md">
                 <div className="p-2">Tick spacing</div>
               </div>{" "}
               <div className="p-2">60</div>
             </div>
 
             <div className="border rounded-md flex flex-row text-sm">
-              <div className="border-r bg-secondary">
+              <div className="border-r bg-secondary rounded-l-md">
                 <div className="p-2">Hooks</div>
               </div>{" "}
               <div className="p-2">2</div>
@@ -209,11 +212,22 @@ function HookCategory({ id, name }: { id: number; name: string }) {
 }
 
 function HookSpec({ hook }: { hook: IHook }) {
+  const [installed, setInstalled] = useState(false);
   return (
-    <Card className="hover:cursor-pointer">
-      <CardHeader className="flex flex-row justify-between">
+    <Card>
+      <CardHeader className="flex flex-row justify-between items-end">
         <CardTitle className="text-xl">{hook.name}</CardTitle>
-        <Checkbox />
+        <div
+          className={cn(
+            "text-xs rounded-md py-1 px-3 hover:cursor-pointer border select-none",
+            installed
+              ? "hover:underline hover:text-primary border-transparent"
+              : "bg-primary"
+          )}
+          onClick={() => setInstalled(!installed)}
+        >
+          {installed ? "remove" : "install"}
+        </div>
       </CardHeader>
       <CardContent className="text-sm">{hook.desc}</CardContent>
       <CardFooter className="text-xs">@{hook.author}</CardFooter>
