@@ -1,0 +1,16 @@
+export const HOOK_PERMISSIONS = [
+    "Before Initialize",
+    "After Initialize",
+    "Before Add Liquidity",
+    "After Add Liquidity",
+    "Before Remove Liquidity",
+    "After Remove Liquidity",
+    "Before Swap",
+    "After Swap",
+    "Before Donate",
+    "After Donate",
+    "Before Swap Return Delta",
+    "After Swap Return Delta",
+    "After Add Liquidity Return Data",
+    "After Remove Liquidity Return Data",
+];
