@@ -22,7 +22,7 @@ export class Hook {
     public desc: string;
     public author: string;
     public category: string;
-    public perms: number[];
+    public perms: HookPermisson[];
 
     constructor(
         name: string,
