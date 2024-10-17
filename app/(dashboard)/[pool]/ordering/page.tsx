@@ -1,6 +1,5 @@
 "use client";
 import { useContext, useMemo, useState } from "react";
-import Sidebar from "./sidebar";
 import { DeployContext } from "@/context/deploy";
 import { Hook } from "@/lib/hookPerm";
 import {
@@ -11,7 +10,6 @@ import {
   ChevronUpIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
@@ -49,7 +47,7 @@ export default function Ordering() {
       </div>
       <Table>
         <TableHeader>
-          <TableRow>
+          <TableRow className="hover:bg-transparent">
             <TableHead>#</TableHead>
             {Object.keys(perms).map((perm, idx) => (
               <TableHead>{HOOK_PERMISSIONS[Number(perm)]}</TableHead>
@@ -59,7 +57,7 @@ export default function Ordering() {
         <TableBody>
           {hooks.map((hook, idx) => {
             return (
-              <TableRow>
+              <TableRow className="hover:bg-transparent">
                 <TableCell>{idx}</TableCell>
                 {Object.keys(perms).map((perm, hidx) => (
                   <TableCell key={hidx}>
