@@ -3,7 +3,6 @@ import { DeployContext } from "@/context/deploy";
 import { useContext } from "react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import ReviewHooks from "@/app/market/review";
 import Link from "next/link";
 
 export default function Footer() {
@@ -42,15 +41,13 @@ export default function Footer() {
           </div>
         </div>
         <div className="space-x-6">
-          <Link href="/my-first-pool/settings" className="text-primary">
+          <Link
+            href="/my-first-pool/settings"
+            className="text-primary hover:underline"
+          >
             Edit
           </Link>
 
-          <ReviewHooks>
-            <Button variant="link" className="text-xs" size="sm">
-              Review Hooks
-            </Button>
-          </ReviewHooks>
           <Button
             className="text-xs"
             size="sm"

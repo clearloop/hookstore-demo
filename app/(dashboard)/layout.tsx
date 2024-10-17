@@ -20,8 +20,9 @@ export default function Layout({ children }: { children: ReactNode }) {
     <>
       <section className="mb-6 flex flex-row items-center border-b pb-1 px-6 text-sm">
         {["Overview", "Hooks", "Ordering", "Parameters", "Settings"].map(
-          (route) => (
+          (route, idx) => (
             <Link
+              key={idx}
               href={`/my-first-pool/${route.toLowerCase()}`}
               className={cn(
                 "border-separate border-spacing-5 border-slate-500 underline-offset-8 hover:cursor-pointer text-gray-400",
