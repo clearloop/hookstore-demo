@@ -10,7 +10,7 @@ import {
 import { DeployContext } from "@/context/deploy";
 import { HOOK_PERMISSIONS } from "@/lib/constants";
 import { Hook, HookPermisson } from "@/lib/hookPerm";
-import { ReactNode, useContext, useMemo } from "react";
+import { ReactNode, useContext, useEffect, useMemo } from "react";
 import {
   Table,
   TableBody,
@@ -44,7 +44,7 @@ export default function ReviewHooks({ children }: { children: ReactNode }) {
               <PermissionTable hooks={hooks} />
             </TabsContent>
             <TabsContent value="orders">
-              <PermissionTable hooks={hooks} />
+              <OrderTable hooks={hooks} />
             </TabsContent>
           </Tabs>
 
@@ -89,8 +89,8 @@ function PermissionTable({ hooks }: { hooks: Hook[] }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {perms.map((perm) => (
-          <TableRow>
+        {perms.map((perm, idx) => (
+          <TableRow key={idx}>
             <TableCell className="select-none">
               {HOOK_PERMISSIONS[perm]}
             </TableCell>
@@ -109,6 +109,44 @@ function PermissionTable({ hooks }: { hooks: Hook[] }) {
       <TableCaption>
         Enable or disable permissions of hooks on your demand.
       </TableCaption>
+    </Table>
+  );
+}
+
+function OrderTable({ hooks }: { hooks: Hook[] }) {
+  const perms: Record<number, string[]> = useMemo(() => {
+    let perms: Record<number, string[]> = {};
+
+    hooks.forEach((hook) => {
+      hook.perms.forEach((perm) => {
+        if (!perms[perm]) perms[perm] = [];
+        perms[perm].push(hook.name);
+      });
+    });
+
+    return perms;
+  }, [hooks]);
+
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Permission</TableHead>
+          {Object.keys(perms).map((idx) => (
+            <TableHead key={idx}>
+              <TableCell>{HOOK_PERMISSIONS[Number(idx)]}</TableCell>
+            </TableHead>
+          ))}
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {Object.keys(perms).map((idx) => (
+          <TableRow key={idx}>
+            <TableCell>{HOOK_PERMISSIONS[Number(idx)]}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+      <TableCaption>Manage the exuection orders of hooks</TableCaption>
     </Table>
   );
 }
