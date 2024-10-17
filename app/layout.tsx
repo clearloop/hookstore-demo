@@ -5,6 +5,8 @@ import "./globals.css";
 import { DeployProvider } from "@/context/deploy";
 import { Toaster } from "sonner";
 import RootProvider from "@/context/root";
+import Navbar from "@/components/nav";
+import Footer from "@/components/footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,7 +36,14 @@ export default function RootLayout({
       >
         <RootProvider>
           <Toaster richColors theme="dark" closeButton />
-          <DeployProvider>{children}</DeployProvider>
+          <DeployProvider>
+            <main className="min-h-screen flex flex-col">
+              <Navbar />
+              {children}
+              <div className="flex grow"></div>
+              <Footer />
+            </main>
+          </DeployProvider>
         </RootProvider>
       </body>
     </html>
