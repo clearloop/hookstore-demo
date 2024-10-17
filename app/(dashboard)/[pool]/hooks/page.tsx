@@ -12,8 +12,9 @@ import {
   TableHead,
   TableHeader,
 } from "@/components/ui/table";
-import { EclipseIcon, GithubIcon } from "lucide-react";
+import { EclipseIcon, GithubIcon, LeafyGreenIcon } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
+import { Badge } from "@/components/ui/badge";
 
 export default function Hooks() {
   const [perm, setPerm] = useState(42);
@@ -54,11 +55,15 @@ export default function Hooks() {
             </Button>
           </h1>
           <div className="py-3 flex flex-row space-x-6 text-sm">
+            <div className="p-1 border rounded-md bg-secondary flex flex-row items-center space-x-2">
+              <LeafyGreenIcon size={16} />
+              <span className="text-primary">Free</span>
+            </div>
             <div className="p-1 border rounded-md bg-secondary">
               Authored by <span className="text-primary">{hook.author}</span>
             </div>
             <div className="p-1 border rounded-md bg-secondary">
-              Audited <span className="text-primary">5+</span>
+              Audits <span className="text-primary">5+</span>
             </div>
             <div className="p-1 border rounded-md bg-secondary">
               Ranking <span className="text-primary">#3</span>
@@ -71,10 +76,13 @@ export default function Hooks() {
           <div className="py-6">
             <h2 className="text-xl font-bold flex flex-row justify-between pb-1">
               <div>
-                Before Initialize <span className="text-sm">*required</span>
+                Before Initialize <Badge>required</Badge>
               </div>
               <Switch defaultChecked={true} />
             </h2>
+            <p className="text-sm text-gray-400 pb-2">
+              Charges 0% on this operation
+            </p>
             <p>Register pool to global state</p>
           </div>
           <div className="py-6">
@@ -82,15 +90,21 @@ export default function Hooks() {
               <div>Before Add Liqudity</div>
               <Switch defaultChecked={true} />
             </h2>
+            <p className="text-sm text-gray-400 pb-2">
+              Charges 0% on this operation
+            </p>
             <p>Fits liquidity into dynamic ranges.</p>
           </div>
           <div className="py-6">
             <h2 className="text-xl font-bold flex flex-row justify-between pb-1">
               <div>
-                Before Swap <span className="text-sm">*required</span>
+                Before Swap <Badge>required</Badge>
               </div>
               <Switch defaultChecked={true} />
             </h2>
+            <p className="text-sm text-gray-400 pb-2">
+              Charges 0% on this operation
+            </p>
             <p>
               Core feature of this hook, move the range of liquditiy if
               necessary.
