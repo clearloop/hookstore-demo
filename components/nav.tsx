@@ -32,7 +32,9 @@ export default function Navbar() {
           </Link>
           <Slash size={16} className="text-gray-400" />
           <div className="flex flex-row items-center space-x-1 text-sm">
-            <div className="font-bold">My First Pool</div>
+            <div className="font-bold select-none hover:cursor-pointer">
+              My First Pool
+            </div>
             <Popover>
               <PopoverTrigger asChild>
                 <Button variant="ghost" className="px-1">
@@ -84,23 +86,6 @@ export default function Navbar() {
         </div>
         <div className="text-xs">
           <ConnectButton label="Connect" />
-        </div>
-      </section>
-      <section className="mb-6 flex flex-row items-center border-b pb-1 px-6 text-sm">
-        <div className="border-separate border-spacing-5 border-slate-500 underline-offset-8 hover:cursor-pointer text-gray-400">
-          &nbsp;&nbsp;Overview&nbsp;&nbsp;
-        </div>
-        <div className="border-separate border-spacing-5 border-slate-500 underline underline-offset-8 hover:cursor-pointer">
-          &nbsp;&nbsp;Hooks&nbsp;&nbsp;
-        </div>
-        <div className="border-separate border-spacing-5 border-slate-500 underline-offset-8 hover:cursor-pointer text-gray-400">
-          &nbsp;&nbsp;Ordering&nbsp;&nbsp;
-        </div>
-        <div className="border-separate border-spacing-5 border-slate-500 underline-offset-8 hover:cursor-pointer text-gray-400">
-          &nbsp;&nbsp;Parameters&nbsp;&nbsp;
-        </div>
-        <div className="border-separate border-spacing-5 border-slate-500 underline-offset-8 hover:cursor-pointer text-gray-400">
-          &nbsp;&nbsp;Settings&nbsp;&nbsp;
         </div>
       </section>
     </nav>

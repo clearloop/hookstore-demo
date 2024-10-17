@@ -19,12 +19,9 @@ import { DeployContext } from "@/context/deploy";
 import { HOOKS } from "@/lib/mock";
 import { cn } from "@/lib/utils";
 import { useContext, useMemo, useState } from "react";
-import ReviewHooks from "./market/review";
 import { HOOK_PERMISSIONS } from "@/lib/constants";
-import { toast } from "sonner";
 import { Hook } from "@/lib/hookPerm";
 import { ConnectButton, useConnectModal } from "@rainbow-me/rainbowkit";
-import Navbar from "@/components/nav";
 
 const CATEGORIES = [
   "All",
@@ -40,11 +37,10 @@ export default function Home() {
   const { openConnectModal } = useConnectModal();
 
   return (
-    <main className="h-screen flex flex-col">
-      <Navbar />
-      {/* <section className="py-6 text-3xl font-bold w-full flex justify-center pb-10">
+    <main className="flex flex-col">
+      <section className="py-8 text-3xl font-bold w-full flex justify-center pb-10">
         Create Uniswap V4 pools within clicks, earn from developing hooks.
-      </section> */}
+      </section>
       <section className="flex flex-row space-x-6 justify-between px-12">
         <Select>
           <SelectTrigger className="w-[180px]">
@@ -83,57 +79,6 @@ export default function Home() {
           {HOOKS.map((h, idx) => (
             <HookSpec key={idx} hook={h} />
           ))}
-        </div>
-      </section>
-      <section className="flex grow"></section>
-      <section className="py-3 border-t text-xs">
-        <div className="px-12 flex flex-row justify-between">
-          <div className="flex flex-row items-center space-x-6">
-            <div className="border rounded-md flex flex-row">
-              <div className="border-r bg-secondary rounded-l-md">
-                <div className="p-2">Pair</div>
-              </div>{" "}
-              <div className="p-2">UNI / ETH</div>
-            </div>
-
-            <div className="border rounded-md flex flex-row">
-              <div className="border-r bg-secondary rounded-l-md">
-                <div className="p-2">Fee Tier</div>
-              </div>{" "}
-              <div className="p-2">0.30%</div>
-            </div>
-
-            <div className="border rounded-md flex flex-row">
-              <div className="border-r bg-secondary rounded-l-md">
-                <div className="p-2">Tick spacing</div>
-              </div>{" "}
-              <div className="p-2">60</div>
-            </div>
-
-            <div className="border rounded-md flex flex-row">
-              <div className="border-r bg-secondary rounded-l-md">
-                <div className="p-2">Hooks</div>
-              </div>{" "}
-              <div className="p-2">{hooks.length}</div>
-            </div>
-          </div>
-          <div className="space-x-6">
-            <Button variant="link" className="text-xs" size="sm">
-              Edit
-            </Button>
-            <ReviewHooks>
-              <Button variant="link" className="text-xs" size="sm">
-                Review Hooks
-              </Button>
-            </ReviewHooks>
-            <Button
-              className="text-xs"
-              size="sm"
-              onClick={() => toast.info("Working in progress ...")}
-            >
-              Deploy
-            </Button>
-          </div>
         </div>
       </section>
     </main>
