@@ -20,7 +20,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 
@@ -35,19 +34,7 @@ export default function ReviewHooks({ children }: { children: ReactNode }) {
           <DialogTitle>Review Hooks</DialogTitle>
         </DialogHeader>
         <section>
-          <Tabs defaultValue="permissions" className="">
-            <TabsList>
-              <TabsTrigger value="permissions">Permissions</TabsTrigger>
-              <TabsTrigger value="orders">Orders</TabsTrigger>
-            </TabsList>
-            <TabsContent value="permissions">
-              <PermissionTable hooks={hooks} />
-            </TabsContent>
-            <TabsContent value="orders">
-              <OrderTable hooks={hooks} />
-            </TabsContent>
-          </Tabs>
-
+          <PermissionTable hooks={hooks} />
           <div className="w-full pt-6">
             <DialogClose asChild>
               <Button className="w-full">Save Changes</Button>

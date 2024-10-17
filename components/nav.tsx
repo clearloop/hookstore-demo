@@ -32,8 +32,9 @@ export default function Navbar() {
           </Link>
           <Slash size={16} className="text-gray-400" />
           <div className="flex flex-row items-center space-x-1 text-sm">
-            <div className="font-bold select-none hover:cursor-pointer">
-              My First Pool
+            <div className="font-bold select-none hover:cursor-pointer flex flex-row space-x-1 items-center">
+              <WavesIcon size={16} />
+              <div>My First Pool</div>
             </div>
             <Popover>
               <PopoverTrigger asChild>

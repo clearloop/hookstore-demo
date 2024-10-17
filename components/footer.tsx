@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import ReviewHooks from "@/app/market/review";
+import Link from "next/link";
 
 export default function Footer() {
   const { hooks } = useContext(DeployContext);
@@ -41,9 +42,10 @@ export default function Footer() {
           </div>
         </div>
         <div className="space-x-6">
-          <Button variant="link" className="text-xs" size="sm">
+          <Link href="/my-first-pool/settings" className="text-primary">
             Edit
-          </Button>
+          </Link>
+
           <ReviewHooks>
             <Button variant="link" className="text-xs" size="sm">
               Review Hooks

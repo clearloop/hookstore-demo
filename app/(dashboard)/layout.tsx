@@ -23,7 +23,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           &nbsp;&nbsp;Ordering&nbsp;&nbsp;
         </div>
         <div className="border-separate border-spacing-5 border-slate-500 underline-offset-8 hover:cursor-pointer text-gray-400">
-          &nbsp;&nbsp;Overview&nbsp;&nbsp;
+          &nbsp;&nbsp;Parameters&nbsp;&nbsp;
         </div>
         <div className="border-separate border-spacing-5 border-slate-500 underline-offset-8 hover:cursor-pointer text-gray-400">
           &nbsp;&nbsp;Settings&nbsp;&nbsp;
