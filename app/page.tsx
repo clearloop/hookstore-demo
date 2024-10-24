@@ -14,10 +14,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import { DeployContext } from "@/context/deploy";
+import { DeployContext } from "@/context/deploy";
 import { HOOKS } from "@/lib/mock";
 import { cn } from "@/lib/utils";
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { HOOK_PERMISSIONS } from "@/lib/constants";
 import { Hook } from "@/lib/hookPerm";
 // import { useConnectModal } from "@rainbow-me/rainbowkit";
