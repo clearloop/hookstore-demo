@@ -1,15 +1,13 @@
 import { Hook } from "./hookPerm";
 
-export interface IHook extends Hook {}
-
 export interface IDeployContext {
     currency0: string;
     currency1: string;
     feeTier: number;
     tickSpacing: number;
     hooks: Hook[];
-    addHook: (hook: IHook) => void;
-    removeHook: (hook: IHook) => void;
+    addHook: (hook: Hook) => void;
+    removeHook: (hook: Hook) => void;
 }
 
 export interface IHookPermission {

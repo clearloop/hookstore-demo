@@ -3,7 +3,6 @@ import {
   CheckIcon,
   ChevronsUpDown,
   CirclePlusIcon,
-  ExpandIcon,
   Slash,
   WavesIcon,
   WebhookIcon,
