@@ -17,10 +17,10 @@ import {
 import { DeployContext } from "@/context/deploy";
 import { HOOKS } from "@/lib/mock";
 import { cn } from "@/lib/utils";
-import { useContext, useMemo, useState } from "react";
+import { useContext, useMemo } from "react";
 import { HOOK_PERMISSIONS } from "@/lib/constants";
 import { Hook } from "@/lib/hookPerm";
-import { ConnectButton, useConnectModal } from "@rainbow-me/rainbowkit";
+// import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 const CATEGORIES = [
   "All",
@@ -32,8 +32,8 @@ const CATEGORIES = [
 ];
 
 export default function Home() {
-  const { hooks } = useContext(DeployContext);
-  const { openConnectModal } = useConnectModal();
+  // const { hooks } = useContext(DeployContext);
+  // const { openConnectModal } = useConnectModal();
 
   return (
     <main className="flex flex-col">

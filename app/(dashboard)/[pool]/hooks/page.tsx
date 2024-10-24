@@ -5,19 +5,11 @@ import Sidebar from "./sidebar";
 import { Hook } from "@/lib/hookPerm";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-} from "@/components/ui/table";
 import { EclipseIcon, GithubIcon, LeafyGreenIcon } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 
 export default function Hooks() {
-  const [perm, setPerm] = useState(42);
   const { hooks } = useContext(DeployContext);
   const [hook, setHook] = useState<Hook | undefined>(undefined);
 

@@ -42,7 +42,7 @@ export class Hook {
         return Array.from(Array(HOOK_PERMISSIONS.length).keys());
     }
 
-    public hasAccess(perm: HookPermisson): boolean {
+    public hasAccess?(perm: HookPermisson): boolean {
         return this.perms.includes(perm);
     }
 }

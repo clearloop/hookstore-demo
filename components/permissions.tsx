@@ -1,24 +1,18 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverTrigger } from "@/components/ui/popover";
-import { ChevronDownSquareIcon, ChevronsUpDownIcon } from "lucide-react";
-import { useState } from "react";
+import { ChevronsUpDownIcon } from "lucide-react";
+// import { useState } from "react";
 
-export default function SelectPermissions({
-  perm,
-  setPerm,
-}: {
-  perm: number;
-  setPerm: (_perm: number) => void;
-}) {
-  const [open, setOpen] = useState(false);
+export default function SelectPermissions() {
+  // const [open, setOpen] = useState(false);
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          aria-expanded={open}
+          aria-expanded={false}
           className="w-[200px] justify-between"
         >
           {"Select permission..."}

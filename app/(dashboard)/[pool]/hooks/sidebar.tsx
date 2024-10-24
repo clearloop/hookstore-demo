@@ -1,6 +1,6 @@
 import { Hook } from "@/lib/hookPerm";
 import { cn } from "@/lib/utils";
-import { CheckCircleIcon, CircleCheckIcon } from "lucide-react";
+import { CircleCheckIcon } from "lucide-react";
 
 export default function Sidebar({
   hooks,

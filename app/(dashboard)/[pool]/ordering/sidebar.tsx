@@ -6,19 +6,17 @@ import { useEffect, useMemo } from "react";
 
 export default function Sidebar({
   hooks,
-  orders,
   setOrders,
   setStep,
   step,
 }: {
   hooks: Hook[];
-  orders: Hook[];
   setOrders: (_orders: Hook[]) => void;
   setStep: (_step: number) => void;
   step?: number;
 }) {
   const perms: Record<number, Hook[]> = useMemo(() => {
-    let perms: Record<number, Hook[]> = {};
+    const perms: Record<number, Hook[]> = {};
 
     hooks.forEach((hook) => {
       hook.perms.forEach((perm) => {
@@ -35,7 +33,7 @@ export default function Sidebar({
       setStep(hooks[0].perms[0]);
       setOrders(perms[hooks[0].perms[0]]);
     }
-  }, [perms]);
+  }, [perms, setOrders, hooks, setStep, step]);
 
   return (
     <section className="flex flex-col space-y-3">
