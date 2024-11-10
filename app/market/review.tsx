@@ -2,7 +2,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -10,7 +9,7 @@ import {
 import { DeployContext } from "@/context/deploy";
 import { HOOK_PERMISSIONS } from "@/lib/constants";
 import { Hook, HookPermisson } from "@/lib/hookPerm";
-import { ReactNode, useContext, useEffect, useMemo } from "react";
+import { ReactNode, useContext, useMemo } from "react";
 import {
   Table,
   TableBody,
@@ -66,9 +65,9 @@ function PermissionTable({ hooks }: { hooks: Hook[] }) {
       <TableHeader>
         <TableRow>
           <TableHead>Permission</TableHead>
-          {hooks.map((h) => (
-            <TableHead className="select-none">
-              <div className="flex flex-row items-center space-x-1">
+          {hooks.map((h, idx) => (
+            <TableHead className="select-none" key={idx}>
+              <div key={idx} className="flex flex-row items-center space-x-1">
                 <div>{h.name}</div>
               </div>
             </TableHead>
@@ -81,8 +80,8 @@ function PermissionTable({ hooks }: { hooks: Hook[] }) {
             <TableCell className="select-none">
               {HOOK_PERMISSIONS[perm]}
             </TableCell>
-            {hooks.map((h) => (
-              <TableCell className="select-none">
+            {hooks.map((h, idx) => (
+              <TableCell className="select-none" key={idx}>
                 {h.perms.includes(perm) ? (
                   <Switch defaultChecked={true} />
                 ) : (
@@ -100,40 +99,40 @@ function PermissionTable({ hooks }: { hooks: Hook[] }) {
   );
 }
 
-function OrderTable({ hooks }: { hooks: Hook[] }) {
-  const perms: Record<number, string[]> = useMemo(() => {
-    let perms: Record<number, string[]> = {};
-
-    hooks.forEach((hook) => {
-      hook.perms.forEach((perm) => {
-        if (!perms[perm]) perms[perm] = [];
-        perms[perm].push(hook.name);
-      });
-    });
-
-    return perms;
-  }, [hooks]);
-
-  return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Permission</TableHead>
-          {Object.keys(perms).map((idx) => (
-            <TableHead key={idx}>
-              <TableCell>{HOOK_PERMISSIONS[Number(idx)]}</TableCell>
-            </TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {Object.keys(perms).map((idx) => (
-          <TableRow key={idx}>
-            <TableCell>{HOOK_PERMISSIONS[Number(idx)]}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-      <TableCaption>Manage the exuection orders of hooks</TableCaption>
-    </Table>
-  );
-}
+// function OrderTable({ hooks }: { hooks: Hook[] }) {
+//   const perms: Record<number, string[]> = useMemo(() => {
+//     let perms: Record<number, string[]> = {};
+//
+//     hooks.forEach((hook) => {
+//       hook.perms.forEach((perm) => {
+//         if (!perms[perm]) perms[perm] = [];
+//         perms[perm].push(hook.name);
+//       });
+//     });
+//
+//     return perms;
+//   }, [hooks]);
+//
+//   return (
+//     <Table>
+//       <TableHeader>
+//         <TableRow>
+//           <TableHead>Permission</TableHead>
+//           {Object.keys(perms).map((idx) => (
+//             <TableHead key={idx}>
+//               <TableCell>{HOOK_PERMISSIONS[Number(idx)]}</TableCell>
+//             </TableHead>
+//           ))}
+//         </TableRow>
+//       </TableHeader>
+//       <TableBody>
+//         {Object.keys(perms).map((idx) => (
+//           <TableRow key={idx}>
+//             <TableCell>{HOOK_PERMISSIONS[Number(idx)]}</TableCell>
+//           </TableRow>
+//         ))}
+//       </TableBody>
+//       <TableCaption>Manage the exuection orders of hooks</TableCaption>
+//     </Table>
+//   );
+// }

@@ -1,16 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
-import {
-  CheckIcon,
-  ChevronsUpDown,
-  CirclePlusIcon,
-  ExpandIcon,
-  Slash,
-  WavesIcon,
-  WebhookIcon,
-} from "lucide-react";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
 export default function Layout({ children }: { children: ReactNode }) {

@@ -1,14 +1,8 @@
 "use client";
-import { useContext, useMemo, useState } from "react";
+import { useContext, useMemo } from "react";
 import { DeployContext } from "@/context/deploy";
 import { Hook } from "@/lib/hookPerm";
-import {
-  ArrowDownIcon,
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  ArrowUpIcon,
-  ChevronUpIcon,
-} from "lucide-react";
+import { ArrowDownIcon, ArrowUpIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -23,11 +17,9 @@ import { HOOK_PERMISSIONS } from "@/lib/constants";
 
 export default function Ordering() {
   const { hooks } = useContext(DeployContext);
-  const [step, setStep] = useState<number | undefined>(undefined);
-  const [orders, setOrders] = useState<Hook[]>([]);
 
   const perms: Record<number, Hook[]> = useMemo(() => {
-    let perms: Record<number, Hook[]> = {};
+    const perms: Record<number, Hook[]> = {};
 
     hooks.forEach((hook) => {
       hook.perms.forEach((perm) => {
@@ -50,14 +42,14 @@ export default function Ordering() {
           <TableRow className="hover:bg-transparent">
             <TableHead>#</TableHead>
             {Object.keys(perms).map((perm, idx) => (
-              <TableHead>{HOOK_PERMISSIONS[Number(perm)]}</TableHead>
+              <TableHead key={idx}>{HOOK_PERMISSIONS[Number(perm)]}</TableHead>
             ))}
           </TableRow>
         </TableHeader>
         <TableBody>
           {hooks.map((hook, idx) => {
             return (
-              <TableRow className="hover:bg-transparent">
+              <TableRow className="hover:bg-transparent" key={idx}>
                 <TableCell>{idx}</TableCell>
                 {Object.keys(perms).map((perm, hidx) => (
                   <TableCell key={hidx}>
